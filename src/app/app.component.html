@@ -1,0 +1,84 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between mb-4">
+    <div>
+      <button [ngClass]="(language == 'en')?'btn btn-primary':'btn btn-secondary'" (click)="languageSelect('en')">English</button>
+      <button [ngClass]="(language == 'hu')?'btn btn-primary':'btn btn-secondary'" (click)="languageSelect('hu')">Magyar</button>
+    </div>
+    <h1>{{translate('TITLE')}}</h1>
+  </div>
+
+  <form (ngSubmit)="addProduct()" class="mb-4" name="prodForm">
+    <div class="row g-3">
+      <div class="col md-3">
+        <input
+          type="text"
+          id="productName"
+          class="form-control"
+          [(ngModel)]="newProduct.name"
+          name="productName"
+          placeholder="{{translate('NAME')}}"
+          required/>
+      </div>
+      <div class="col md-3">
+        <input
+          type="text"
+          id="productCategory"
+          class="form-control"
+          [(ngModel)]="newProduct.category"
+          name="productCategory"
+          placeholder="{{translate('CATEGORY')}}"
+          required/>
+      </div>
+      <div class="col-md-3">
+        <input
+          type="text"
+          id="productDescription"
+          class="form-control"
+          [(ngModel)]="newProduct.description"
+          name="productDescription"
+          placeholder="{{translate('DESCRIPTION')}}"
+        />
+      </div>
+      <div class="col-md-2">
+        <input
+          type="number"
+          id="productPrice"
+          class="form-control"
+          [(ngModel)]="newProduct.price"
+          name="productPrice"
+          placeholder="{{translate('PRICE')}}"
+          step="0.01"
+          required/>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-success w-100">{{translate('ADD') }}</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col">{{translate('NAME')}}</div>
+    <div class="col">{{translate('CATEGORY')}}</div>
+    <div class="col">{{translate('DESCRIPTION')}}</div>
+    <div class="col">{{translate('PRICE')}}</div>
+    <div class="col">{{translate('ACTIONS')}}</div>
+  </div>
+  <div class="row" *ngFor="let product of products">
+    <div class="col">
+      <input class="form-control" [(ngModel)]="product.name" name="productName"/>
+    </div>
+    <div class="col">
+      <input class="form-control" [(ngModel)]="product.category" name="productName"/>
+    </div>
+    <div class="col">
+      <input class="form-control" [(ngModel)]="product.description" name="productName"/>
+    </div>
+    <div class="col">
+      <input class="form-control" [(ngModel)]="product.price" name="productName"/>
+    </div>
+    <div class="col">
+      <button class="btn btn-primary me-2" (click)="updateProduct(product)">{{translate('UPDATE')}}</button>
+      <button class="btn btn-danger" (click)="deleteProduct(product.id)">{{translate('DELETE')}}</button>
+    </div>
+  </div>
+</div>
